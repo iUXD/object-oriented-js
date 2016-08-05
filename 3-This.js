@@ -7,13 +7,13 @@ Instead of defining the bound value explicitly in your code, 'this' is bound to 
 The rules for what gets bound to 'this' resemble the rules for normal positional parameters. */
 
 // Q: What is 'this' bound to? 
-var obj = {
+/*var obj = {
 	fn : function(a, b) {
 		console.log(this);
 	}
 };
 
-obj.fn(3,4);
+obj.fn(3,4);*/
 //-^- A: the object to the left of the dot on a function invocation
 // the object to the left of the dot when you call the function is what 'this' refers to 90% of the time! 
 
@@ -27,12 +27,12 @@ trick question: NOTHING */
 
 // *** Predicting Parameter Output (2)
 
-var fn = function(one, two) {
+/*var fn = function(one, two) {
 	console.log(one, two);
 };
 var r = {}, g = {}, b = {};
 
-fn(g,b);
+fn(g,b);*/
 // -> {}, {}  (g and b objects)
 
 // *** Predicting 'this' Output
@@ -44,24 +44,30 @@ var fn = function(one, two) {
 var r = {r:"red"}, g = {g:"green"}, b = {b:"blue"}; // added key value pair to objects to differentiate them when logged
 
 // need to make fn a property of a variable in order to call 'this' as a method
-r.method = fn;
+//r.method = fn;
 // now call fn as a method of r 
-r.method(g,b); // logs r, g, b ('this' refers to r, which is the object to the left of the dot when the fn is called)
+//r.method(g,b); // logs r, g, b ('this' refers to r, which is the object to the left of the dot when the fn is called)
 // -^- comment OUT this line after *** Predicting 'this' Output (2) 
 
-// fn(g,b);  -> uncomment this line for *** Predicting 'this' Output (3) 
+//fn(g,b);  //-> uncomment this line for *** Predicting 'this' Output (3) 
 // without a dot, you can expect a global variable to be bound to 'this' by default
 
 // *** Predicting 'this' Output (4) // uncomment the code under here for this exercise 
-// var y = {y: "yellow"};
-// r.method.call(y, g, b);
+//var y = {y: "yellow"};
+//r.method.call(y, g, b);
 
 
 // *** Predicting 'this' Output (5) // uncomment the code under here for this exercise 
-// var y = {y: "yellow"};
-// r.method = fn;
-// setTimeout(fn, 1000); // undefined, undefined 
+var y = {y: "yellow"};
+r.method = fn;
 
+/*var setTimeout = function(cb, ms) {
+	waitSomehow(ms);
+	cb(); //maybe?
+};*/
+
+//setTimeout(fn, 1000); // undefined, undefined 
+setTimeout(r.method, 1000);
 // TODO: finish these lesson notes! 
 
 
